@@ -4,7 +4,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function (req, res) {
-    res.render('index', { title: 'Ödeme Ekranı' });
+    res.render('index', { title: 'Payment Screen' });
 });
 
 module.exports = router;
