@@ -2,12 +2,12 @@
 
 **app.js altında**
 
-* *1-main.js module'unun tanımlanması 
+* main.js module'unun tanımlanması 
 ```
 var main = require('./modules/main');
 ```
 
-* *2- Ödeme için client'tan gelecek olan SendPayment Requestinin server tarafından karşılanmasının sağlanması
+* Ödeme için client'tan gelecek olan SendPayment Requestinin server tarafından karşılanmasının sağlanması
 ```
 var app = express();
 app.post('/SendPayment', function(req, res){
@@ -30,13 +30,13 @@ app.post('/SendPayment', function(req, res){
 
 **#main.js altında**
 
-* *1-gerekli custom modüllerin tanımlanması 
+* gerekli custom modüllerin tanımlanması 
 ```
 var fileReader = require('./fileReader');
 var service = require('./service');
 ```
 
-* *2- hem qr kodunu okuyacak hem de apiye request atacak methodların çağırılmasını sağlayacak start methodu
+* hem qr kodunu okuyacak hem de apiye request atacak methodların çağırılmasını sağlayacak start methodu
 ```
 function start(amount, receiptMsgMerchant, receiptMsgCustomer) {
     return new Promise(function (resolve, reject) {
@@ -53,7 +53,7 @@ function start(amount, receiptMsgMerchant, receiptMsgCustomer) {
 
 **#filereader.js altında**
 
-* *1-qr kodu txt'den okuyacak generic methodun tanımlanması
+* qr kodu txt'den okuyacak generic methodun tanımlanması
 ```
 function getQrCode(fileName) {
     var qrCode;
@@ -71,20 +71,20 @@ function getQrCode(fileName) {
 
 **#service.js altında**
 
-* *1-PostPayment isimli api call edecek methodun çağrılması
+* PostPayment isimli api call edecek methodun çağrılması
 ```
 function PostPayment(amount, receiptMsgMerchant, receiptMsgCustomer,qrCode) {
 ```
 
 **#index.pug altında**
 
-* *1-ödeme ekranının hazırlanması ve ödemeyi başlatacak olan ```Payment.Init()``` methodunun çağırılması.
-* *(Ödeme ekranında sadece amount, receiptMsgMerchant, receiptMsgCustomer bilgilerinin manuel girileceği varsayılmıştır )
+* ödeme ekranının hazırlanması ve ödemeyi başlatacak olan ```Payment.Init()``` methodunun çağırılması.
+ (Ödeme ekranında sadece amount, receiptMsgMerchant, receiptMsgCustomer bilgilerinin manuel girileceği varsayılmıştır )
 
 **#paymentscreen.js**
 
-* *1-ödeme ekranından girilen dataların ajax request ile node serverına geçişini sağlayacak olan fonksiyon tanımlanmıştır.
-* *servisten geriye dönen true/false değerini ekranaki label'a basmaktadır.
+* ödeme ekranından girilen dataların ajax request ile node serverına geçişini sağlayacak olan fonksiyon tanımlanmıştır.
+  servisten geriye dönen true/false değerini ekranaki label'a basmaktadır.
 ```
  SendData: function () {
             var amount = $("#amount").val();
