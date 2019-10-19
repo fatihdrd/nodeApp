@@ -81,7 +81,7 @@ function PostPayment(amount, receiptMsgMerchant, receiptMsgCustomer,qrCode) {
 * ödeme ekranının hazırlanması ve ödemeyi başlatacak olan ```Payment.Init()``` methodunun çağırılması.
  (Ödeme ekranında sadece amount, receiptMsgMerchant, receiptMsgCustomer bilgilerinin manuel girileceği varsayılmıştır )
 
-**#paymentscreen.js**
+**#paymentscreen.js altında**
 
 * ödeme ekranından girilen dataların ajax request ile node serverına geçişini sağlayacak olan fonksiyon tanımlanmıştır.
   servisten geriye dönen true/false değerini ekranaki label'a basmaktadır.
@@ -106,4 +106,4 @@ function PostPayment(amount, receiptMsgMerchant, receiptMsgCustomer,qrCode) {
         }
 ```
 
-**NOT: işlem başarılı/hata sayfası/validasyon vs.. kısımları için herhangi bir geliştirme yapılmamıştır.
+**NOT: işlem başarılı/hata sayfası/validasyon vs.. kısımları için herhangi bir geliştirme yapılmamıştır.**
