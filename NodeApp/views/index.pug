@@ -1,0 +1,27 @@
+﻿extends layout
+
+block content
+     h1= title
+     table
+      tbody
+        tr
+          td
+            | Payment Amount :
+          td
+            input#amount(type='text')
+        tr
+          td
+            | Receipt Msg Merchant :
+          td
+            input#receiptMsgMerchant(type='text')
+        tr
+          td
+            | Receipt Msg Customer :
+          td
+            input#receiptMsgCustomer(type='text')
+        tr
+          td
+            input#buttonSubmit(type='button', onclick='Payment.Init();', value='Approve')
+        tr
+          td
+            label#labelResult
