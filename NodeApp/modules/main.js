@@ -8,7 +8,7 @@ function start(amount, receiptMsgMerchant, receiptMsgCustomer) {
                  resolve(result);
               });
         });
-
+         
     });
 }
 
