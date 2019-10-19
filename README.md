@@ -1,14 +1,14 @@
 # NodeApp
 
-#app.js altında
+**app.js altında**
 
-1-main.js module'unun tanımlanması 
-
+* main.js module'unun tanımlanması 
+```
 var main = require('./modules/main');
+```
 
-
-2- Ödeme için client'tan gelecek olan SendPayment Requestinin server tarafından karşılanmasının sağlanması
-
+* Ödeme için client'tan gelecek olan SendPayment Requestinin server tarafından karşılanmasının sağlanması
+```
 var app = express();
 app.post('/SendPayment', function(req, res){
     var store = '';
@@ -16,31 +16,28 @@ app.post('/SendPayment', function(req, res){
     {
         store += data;
     });
-  
-   
+
     req.on('end', function () {
         var input = JSON.parse(store);
         main.Start(input.amount, input.receiptMsgMerchant, input.receiptMsgCustomer).then(function (result) {
             res.setHeader("Content-Type", "text/json");
             res.setHeader("Access-Control-Allow-Origin", "*");
             res.end(result);
-
         });
-     
-        
     });
 });
+```
 
-#main.js altında
+**#main.js altında**
 
-1-gerekli custom modüllerin tanımlanması 
-
+* gerekli custom modüllerin tanımlanması 
+```
 var fileReader = require('./fileReader');
 var service = require('./service');
+```
 
-
-2- hem qr kodunu okuyacak hem de apiye request atacak methodların çağırılmasını sağlayacak start methodu
-
+* hem qr kodunu okuyacak hem de apiye request atacak methodların çağırılmasını sağlayacak start methodu
+```
 function start(amount, receiptMsgMerchant, receiptMsgCustomer) {
     return new Promise(function (resolve, reject) {
         fileReader.getQrCode("qr.txt").then(function (qrCode) {
@@ -52,11 +49,12 @@ function start(amount, receiptMsgMerchant, receiptMsgCustomer) {
 
     });
 }
+```
 
-#filereader.js altında
+**#filereader.js altında**
 
-1-qr kodu txt'den okuyacak generic methodun tanımlanması
-
+* qr kodu txt'den okuyacak generic methodun tanımlanması
+```
 function getQrCode(fileName) {
     var qrCode;
     return new Promise(function (resolve, reject) {
@@ -69,24 +67,25 @@ function getQrCode(fileName) {
             }
         });
     });
+```
 
-#service.js altında
+**#service.js altında**
 
-1-PostPayment isimli api call edecek methodun çağrılması
-
+* PostPayment isimli api call edecek methodun çağrılması
+```
 function PostPayment(amount, receiptMsgMerchant, receiptMsgCustomer,qrCode) {
+```
 
+**#index.pug altında**
 
-#index.pug
+* ödeme ekranının hazırlanması ve ödemeyi başlatacak olan ```Payment.Init()``` methodunun çağırılması.
+ (Ödeme ekranında sadece amount, receiptMsgMerchant, receiptMsgCustomer bilgilerinin manuel girileceği varsayılmıştır )
 
-1-ödeme ekranının hazırlanması ve ödemeyi başlatacak olan Payment.Init() methodunun çağırılması.
-(Ödeme ekranında sadece amount, receiptMsgMerchant, receiptMsgCustomer bilgilerinin manuel girileceği varsayılmıştır )
+**#paymentscreen.js altında**
 
-#paymentscreen.js
-
-1-ödeme ekranından girilen dataların ajax request ile node serverına geçişini sağlayacak olan fonksiyon tanımlanmıştır.
-servisten geriye dönen true/false değerini ekranaki label'a basmaktadır.
-
+* ödeme ekranından girilen dataların ajax request ile node serverına geçişini sağlayacak olan fonksiyon tanımlanmıştır.
+  servisten geriye dönen true/false değerini ekranaki label'a basmaktadır.
+```
  SendData: function () {
             var amount = $("#amount").val();
             var receiptMsgMerchant = $("#receiptMsgMerchant").val();
@@ -105,7 +104,6 @@ servisten geriye dönen true/false değerini ekranaki label'a basmaktadır.
                 },
             })
         }
+```
 
-
-
-	NOT: işlem başarılı/hata sayfası/validasyon vs.. kısımları için herhangi bir geliştirme yapılmamıştır.
+**NOT: işlem başarılı/hata sayfası/validasyon vs.. kısımları için herhangi bir geliştirme yapılmamıştır.**
