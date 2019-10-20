@@ -31,7 +31,7 @@ function PostPayment(amount, receiptMsgMerchant, receiptMsgCustomer,qrCode) {
         request(options, function (error, response, body) {
             if (error) {
                 console.error('Failed: %s', error.message);
-                reject(error.message);
+                reject(error.message); 
             };
             console.log('Success: ', body);
             resolve("işlem başarılı");
