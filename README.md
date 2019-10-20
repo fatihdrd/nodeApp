@@ -16,14 +16,21 @@ app.post('/SendPayment', function(req, res){
     {
         store += data;
     });
-
+  
+   
     req.on('end', function () {
         var input = JSON.parse(store);
         main.Start(input.amount, input.receiptMsgMerchant, input.receiptMsgCustomer).then(function (result) {
             res.setHeader("Content-Type", "text/json");
             res.setHeader("Access-Control-Allow-Origin", "*");
-            res.end(result);
+            res.end(JSON.stringify(result));
+        }).catch(function (err) {
+            res.setHeader("Content-Type", "text/json");
+            res.setHeader("Access-Control-Allow-Origin", "*");
+            res.end(JSON.stringify("Bir hata oluştu"));
         });
+     
+        
     });
 });
 ```
@@ -43,9 +50,18 @@ function start(amount, receiptMsgMerchant, receiptMsgCustomer) {
         fileReader.getQrCode("qr.txt").then(function (qrCode) {
             console.log(qrCode);
             service.PostPayment(amount, receiptMsgMerchant, receiptMsgCustomer, qrCode).then(function (result) {
-                 resolve(result);
-              });
-        });
+                resolve(result);
+            }).catch(
+                function (err) {
+                    console.log("error occured while service request" + err);
+                    reject(err);
+                });
+        }).catch
+            (
+            function (err) {
+                console.log("error occured while reading file" + err);
+                reject(err);
+            });
 
     });
 }
