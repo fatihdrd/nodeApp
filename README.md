@@ -27,7 +27,7 @@ app.post('/SendPayment', function(req, res){
         }).catch(function (err) {
             res.setHeader("Content-Type", "text/json");
             res.setHeader("Access-Control-Allow-Origin", "*");
-            res.end(JSON.stringify("Bir hata oluştu"));
+            res.end(JSON.stringify("Bir hata oluştu-->"+err));
         });
      
         
