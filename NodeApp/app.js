@@ -23,9 +23,12 @@ app.post('/SendPayment', function(req, res){
         main.Start(input.amount, input.receiptMsgMerchant, input.receiptMsgCustomer).then(function (result) {
             res.setHeader("Content-Type", "text/json");
             res.setHeader("Access-Control-Allow-Origin", "*");
-            res.end(result);
-
-        });;
+            res.end(JSON.stringify(result));
+        }).catch(function (err) {
+            res.setHeader("Content-Type", "text/json");
+            res.setHeader("Access-Control-Allow-Origin", "*");
+            res.end(JSON.stringify("Bir hata oluştu"));
+        });
      
         
     });
